@@ -101,3 +101,13 @@ const { Thought, User, Reaction } = require('../models');
             : res.status(200).json(thought);
         });
       }
+
+      module.exports = {
+          getAllThoughts,
+          getThoughtById,
+          createThought,
+          deleteReaction,
+          addReaction,
+          updateThought,
+          deleteThought
+      }
