@@ -4,7 +4,7 @@ const {
     createUser, 
     updateUser,
     getUsers, 
-    getUsersById,
+    getUserById,
     deleteUser, 
     addFriend, 
     deleteFriend,
