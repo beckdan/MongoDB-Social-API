@@ -33,3 +33,25 @@ const { Thought, User, Reaction } = require('../models');
           res.status(500).json(err);
         }
       }
+      const deleteThought = async (req, res) => {
+        try {
+          const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
+      
+          if (!thought) {
+            res.status(404).json({ message: "No thought found with that ID" });
+            return
+          }
+      
+          // Remove thought from associated user
+          await User.findOneAndUpdate(
+            { username: thought.username },
+            { $pull: { thought: thought._id }},
+            );
+      
+          res.status(200).json(thought);
+        } catch (err) {
+          console.log(err);
+          res.status(500).json(err);
+        }
+      
+      }
