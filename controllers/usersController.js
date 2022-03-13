@@ -75,3 +75,13 @@ const createUser = (req, res) => {
     });
   };
   
+
+  module.exports = {
+    createUser,
+    updateUser,
+    getUsers,
+    getUserById,
+    deleteUser,
+    addFriend,
+    deleteFriend,
+  };
