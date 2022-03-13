@@ -1,4 +1,6 @@
-const { Thought, User, Reaction } = require('../models');
+const User = require("../models/User");
+const Thought = require("../models/Thought");
+const Reaction = require("../models/Reaction");
 
     const getAllThoughts = (req, res)  => {
         Thought.find({})
