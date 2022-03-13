@@ -77,8 +77,6 @@ const { Thought, User, Reaction } = require('../models');
             { $push: { reactions: req.body } },
             { runValidators: true, new: true }
           )
-      
-          // console.log(reaction);
         
           if (!thought) {
             res.status(404).json({ message: "No thought found with that ID" })
