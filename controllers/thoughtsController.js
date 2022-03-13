@@ -55,3 +55,49 @@ const { Thought, User, Reaction } = require('../models');
         }
       
       }
+      const updateThought = (req,res) => {
+
+        Thought.findOneAndUpdate(
+          { _id: req.params.thoughtId },
+          { $set: req.body },
+          { runValidators: true, new: true }
+        )
+          .then((thought) => {
+            !thought
+              ? res.status(404).json({ message: "No thought found with that ID" })
+              : res.json(thought);
+          })
+          .catch((err) => res.status(500).json(err));
+      }
+      const addReaction = async (req, res) => {
+        try {
+      
+          const thought = await Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $push: { reactions: req.body } },
+            { runValidators: true, new: true }
+          )
+      
+          // console.log(reaction);
+        
+          if (!thought) {
+            res.status(404).json({ message: "No thought found with that ID" })
+            return
+          }
+          
+          res.json(thought);
+        } catch (err) {
+          console.log(err);
+          res.status(500).json(err)
+        }
+      }
+      const deleteReaction = (req, res) => {
+        Thought.findOneAndUpdate(
+          { _id: req.params.thoughtId },
+          { $pull: { reactions: {_id: req.params.reactionId} } }
+        ).then((thought) => {
+          !thought
+            ? res.status(404).json({ message: "No thought with that ID found" })
+            : res.status(200).json(thought);
+        });
+      }
