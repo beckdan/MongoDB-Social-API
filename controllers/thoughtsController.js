@@ -44,7 +44,6 @@ const Reaction = require("../models/Reaction");
             return
           }
       
-          // Remove thought from associated user
           await User.findOneAndUpdate(
             { username: thought.username },
             { $pull: { thought: thought._id }},

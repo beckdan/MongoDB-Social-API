@@ -1,5 +1,5 @@
-const touter = require('express').Router();
-const { Router } = require('express');
+const router = require('express').Router();
+
 const {
     createUser, 
     updateUser,
