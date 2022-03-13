@@ -52,3 +52,26 @@ const createUser = (req, res) => {
       res.status(500).json(err);
     }
   };
+
+  const addFriend = (req, res) => {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $push: { friends: req.params.friendId } }
+    ).then((user) => {
+      !user
+        ? res.status(404).json({ message: "No user with that ID found" })
+        : res.status(200).json(user);
+    });
+  };
+  
+  const deleteFriend = (req, res) => {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: req.params.friendId } }
+    ).then((user) => {
+      !user
+        ? res.status(404).json({ message: "No user with that ID found" })
+        : res.status(200).json(user);
+    });
+  };
+  
